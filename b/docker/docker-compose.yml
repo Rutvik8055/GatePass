@@ -1,0 +1,12 @@
+services:
+  tourguard:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      TOURGUARD_HOST: 0.0.0.0
+      TOURGUARD_SECRET: ${TOURGUARD_SECRET:?Set TOURGUARD_SECRET in the project .env file}
+    volumes:
+      - ../database:/app/database

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a7d67" />
+    <title>TourGuard AI — Visitor Management</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      .visitor-pass { width: min(100%, 560px); max-width: 560px; border: 1px solid #394640; border-radius: 2px; box-shadow: none; color: #17231d; }
+      .visitor-pass-head { padding: 9px 12px 6px; background: #fff; color: #17231d; }
+      .pass-type { display: grid; place-items: center; width: min(54%, 205px); min-height: 36px; background: #078522; border: 1px solid #173721; color: #fff; font-size: 22px; }
+      .pass-logo { display: flex; align-items: center; gap: 8px; margin-left: auto; font-size: 21px; font-weight: 850; color: #111; }
+      .pass-logo .brand-mark { width: 31px; height: 31px; }
+      .visitor-pass-body { grid-template-columns: minmax(0, 1fr) 152px; gap: 10px; padding: 5px 12px 11px; }
+      .pass-details { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px 13px; }
+      .pass-details div { display: grid; grid-template-columns: 67px minmax(0, 1fr); align-items: baseline; gap: 5px; font-size: 12px; text-transform: none; letter-spacing: 0; color: #25322b; }
+      .pass-details b { margin: 0; font-size: 12px; line-height: 1.25; overflow-wrap: anywhere; }
+      .pass-qr { display: grid; justify-items: center; align-content: start; gap: 3px; }
+      .pass-qr-title { font-size: 10px; letter-spacing: .7px; color: #264a35; }
+      .pass-qr .qr-canvas { width: 130px; height: 130px; }
+      .pass-qr small { max-width: 100%; overflow-wrap: anywhere; text-align: center; font-size: 10px; color: #26332c; }
+      .pass-signatures { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding: 4px 12px 9px; }
+      .pass-signatures div { position: relative; min-height: 30px; padding-top: 17px; text-align: center; font-size: 10px; color: #28352e; }
+      .pass-signatures div::before { position: absolute; top: 0; left: 8%; right: 8%; border-top: 1px solid #8c9690; content: ""; }
+      .pass-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+      .pass-history-button { margin: 3px 0 4px; padding: 5px 8px; border: 1px solid #087d68; border-radius: 4px; background: #fff; color: #056653; font-size: 11px; font-weight: 750; }
+      .pass-history-button:hover { background: #eef8f3; }
+      .pass-preview { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; overflow: auto; padding: 20px; background: rgba(8, 28, 21, .58); }
+      .pass-preview-dialog { width: min(100%, 600px); max-height: calc(100vh - 40px); overflow-y: auto; padding: 15px; background: #fff; box-shadow: 0 18px 60px rgba(0, 0, 0, .25); }
+      .pass-preview-dialog > .visitor-pass { clear: both; margin: 12px auto 0; }
+      .pass-preview-dialog > #close-pass-preview { float: right; }
+      .pass-preview-dialog > .pass-actions { justify-content: flex-end; }
+      @media (max-width: 560px) {
+        .visitor-pass-body { grid-template-columns: minmax(0, 1fr) 108px; gap: 5px; padding-inline: 8px; }
+        .pass-details { grid-template-columns: 1fr; gap: 4px; }
+        .pass-details div { grid-template-columns: 62px minmax(0, 1fr); font-size: 11px; }
+        .pass-details b { font-size: 11px; }
+        .pass-qr .qr-canvas { width: 104px; height: 104px; }
+        .pass-type { width: 54%; min-height: 32px; font-size: 18px; }
+        .pass-logo { font-size: 16px; }
+        .pass-signatures { gap: 5px; padding-inline: 7px; }
+        .pass-signatures div { font-size: 8px; }
+      }
+      @media print {
+        @page { size: A5 landscape; margin: 10mm; }
+        body * { visibility: hidden !important; }
+        body.printing-pass > *:not(#visitor-pass) { display: none !important; }
+        #visitor-pass, #visitor-pass * { visibility: visible !important; }
+        #visitor-pass { position: static; inset: auto; width: 148mm; max-width: 148mm; margin: 0; border: 1px solid #394640; box-shadow: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" aria-live="polite"></div>
+    <div id="toast-stack" class="toast-stack" aria-live="assertive"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>

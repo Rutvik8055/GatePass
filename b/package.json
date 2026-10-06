@@ -1,0 +1,10 @@
+{
+  "name": "tourguard-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TourGuard AI visitor and vehicle management system",
+  "scripts": {
+    "start": "py -3 backend/server.py",
+    "dev": "py -3 backend/server.py"
+  }
+}
